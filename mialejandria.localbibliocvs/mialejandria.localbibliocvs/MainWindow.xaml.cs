@@ -24,12 +24,23 @@ namespace mialejandria.localbibliocvs
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
+            this.Closing += MainWindow_Closing;
+        }
+
+        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            OcultarVentana();
+        }
+
+        private void OcultarVentana()
+        {
+            this.Hide();
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           bandeja.IconoBandeja icono= new bandeja.IconoBandeja();
-           icono.mostrarMensaje("Nueva", "Texto");
+            nar.Navigate("http://mialejandria.blogspot.com?m=1");
             //hola
         }
     }

@@ -20,12 +20,26 @@ namespace mialejandria.localbibliocvs.bandeja
             MenuIcono = new ContextMenu();
             MenuItem mnuSalir = new MenuItem("Salir",mnuSalir_Click);
             MenuItem mnuConfiguracion = new MenuItem("Configuracion", mnuConfiguracion_Click);
+            MenuItem mnuBlog = new MenuItem("Blog", mnuBlog_Click);
 
+
+            MenuIcono.MenuItems.Add(mnuBlog);
             MenuIcono.MenuItems.Add(new MenuItem("-"));
             MenuIcono.MenuItems.Add(mnuConfiguracion);
             MenuIcono.MenuItems.Add(mnuSalir);
             icono.ContextMenu = MenuIcono;
-        }        
+
+            
+            icono.MouseClick += icono_MouseClick;
+        }
+
+        void icono_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                App.mainWindow.Show();
+            }
+        }      
 
         /// <summary>
         /// Muestra un mensaje en la bandeja del sistema
@@ -35,7 +49,7 @@ namespace mialejandria.localbibliocvs.bandeja
         public void mostrarMensaje(string titulo, string mensaje)
         {            
             icono.Icon = new System.Drawing.Icon(".\\icono.ico");
-            icono.ShowBalloonTip(300, "hola", "Texto", ToolTipIcon.Info);
+            icono.ShowBalloonTip(100, titulo, mensaje, ToolTipIcon.Info);
         }
 
         #region "Eventos de los menus"
@@ -46,7 +60,17 @@ namespace mialejandria.localbibliocvs.bandeja
 
             void mnuConfiguracion_Click(object sender, EventArgs e)
             {
-
+                App.mainWindow.Show();
+            }
+            void mnuBlog_Click(object sender, EventArgs e)
+            {
+                App.mainWindow.Show();
+                secciones.blog b = new secciones.blog();
+                
+                App.mainWindow.navegador.Children.Clear();
+                App.mainWindow.navegador.Children.Add(b);
+                b.navegador.Navigate("http://mialejandria.blogspot.com?m=1");
+                
             }
         #endregion
 
