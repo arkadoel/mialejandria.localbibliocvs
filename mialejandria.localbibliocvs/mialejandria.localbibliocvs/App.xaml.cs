@@ -13,5 +13,22 @@ namespace mialejandria.localbibliocvs
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Terminar la aplicacion normalmente
+        /// </summary>
+        public static void CerrarAplicacion()
+        {
+            App.Current.Shutdown(0);
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+
+        }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+
+        }
     }
 }

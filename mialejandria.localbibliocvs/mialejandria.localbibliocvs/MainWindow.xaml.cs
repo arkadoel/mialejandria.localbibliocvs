@@ -23,6 +23,13 @@ namespace mialejandria.localbibliocvs
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+           bandeja.IconoBandeja icono= new bandeja.IconoBandeja();
+           icono.mostrarMensaje("Nueva", "Texto");
         }
     }
 }
