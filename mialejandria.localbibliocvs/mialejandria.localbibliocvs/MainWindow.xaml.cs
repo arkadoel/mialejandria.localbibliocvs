@@ -30,6 +30,7 @@ namespace mialejandria.localbibliocvs
         {
            bandeja.IconoBandeja icono= new bandeja.IconoBandeja();
            icono.mostrarMensaje("Nueva", "Texto");
+            //hola
         }
     }
 }
