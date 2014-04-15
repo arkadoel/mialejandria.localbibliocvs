@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="mialejandria.localbibliocvs.secciones.Configuracion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             MinHeight="500" MinWidth="700" Background="Gainsboro">
+    <Grid>
+        <Label Content="Configuraciones" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
+            <Label.Effect>
+                <DropShadowEffect  ShadowDepth="0"/>
+            </Label.Effect>
+        </Label>
+        <Label Content="Usuario para Git: " HorizontalAlignment="Left" Margin="40,52,0,0" Height="25" VerticalAlignment="Top"/>
+        <Label Content="Email para Git: " HorizontalAlignment="Left" Margin="40,82,0,0" Height="25" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="149,52,0,0" BorderBrush="Gray"  Text="" x:Name="txtNombre" VerticalAlignment="Top" Width="214"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="149,82,0,0" BorderBrush="Gray"   Text="" x:Name="txtEmail" VerticalAlignment="Top" Width="389"/>
+    </Grid>
+</UserControl>

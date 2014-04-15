@@ -40,7 +40,7 @@ namespace mialejandria.localbibliocvs
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //hola
+            this.Title = App.NombreConVersion();
         }
     }
 }

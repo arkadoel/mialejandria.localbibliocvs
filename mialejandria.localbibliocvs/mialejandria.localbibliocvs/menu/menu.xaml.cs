@@ -30,16 +30,14 @@ namespace mialejandria.localbibliocvs.menu
             InitializeComponent();
             lblMenu.MouseLeftButtonDown += lblMenu_MouseLeftButtonDown;
             this.Loaded += menu_Loaded;
+            this.lblMenu.MouseEnter += Efectos.Label_MouseEnter;
+            this.lblMenu.MouseLeave += Efectos.Label_MouseLeave;
         }
 
         void menu_Loaded(object sender, RoutedEventArgs e)
         {
             //Direction="-90" BlurRadius="10" ShadowDepth="10"
-            sombra = new DropShadowEffect();
-            sombra.RenderingBias = RenderingBias.Performance;
-            sombra.Direction =-90;
-            sombra.BlurRadius = 10;
-            sombra.ShadowDepth = 10;
+            sombra = Efectos.getSombra1();
             fondo.Effect = null;
             this.Height = TAM_MIN;
             
@@ -49,14 +47,15 @@ namespace mialejandria.localbibliocvs.menu
         {
             if (this.Height == TAM_MIN)
             {
-                this.Height = TAM_MAX;
+                //this.Height = TAM_MAX;
                 fondo.Effect = sombra;
+                Efectos.AbrirPanel(this, TAM_MIN, TAM_MAX);
+                
             }
             else
-            {
+            {                
+                Efectos.CerrarPanel(this, TAM_MIN, TAM_MAX);
                 fondo.Effect = null;
-                this.Height = TAM_MIN;
-                
             }
         }
     }

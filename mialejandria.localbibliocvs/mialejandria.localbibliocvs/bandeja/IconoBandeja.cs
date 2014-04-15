@@ -60,6 +60,9 @@ namespace mialejandria.localbibliocvs.bandeja
 
             void mnuConfiguracion_Click(object sender, EventArgs e)
             {
+                secciones.Configuracion c = new secciones.Configuracion();
+                App.mainWindow.navegador.Children.Clear();
+                App.mainWindow.navegador.Children.Add(c);
                 App.mainWindow.Show();
             }
             void mnuBlog_Click(object sender, EventArgs e)

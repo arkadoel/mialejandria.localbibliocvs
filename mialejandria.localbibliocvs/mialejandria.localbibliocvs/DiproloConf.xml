@@ -1,4 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Repos>
-  <Repo path="c:\prueba" name="Repositorio1" />
-</Repos>
+<conf>
+  <Repos>
+    <Repo path="c:\prueba" name="Repositorio1" />
+  </Repos>
+  <Tareas>
+    <tarea nombre="tarea 1"
+           hora="19:50" 
+           lunes="true" 
+           martes="true"
+           miercoles="true"
+           jueves="true"
+           viernes="true"
+           sabado="true"
+           domingo="true">       
+    </tarea>    
+  </Tareas>
+  <Git userName="Arkadoel" userEmail="arkadoel@hotmail.com"></Git>
+</conf>
