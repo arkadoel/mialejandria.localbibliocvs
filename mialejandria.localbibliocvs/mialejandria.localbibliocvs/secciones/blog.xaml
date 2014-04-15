@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <WebBrowser Name="navegador"/>
+        <Frame Name="navegador" NavigationUIVisibility="Automatic"  />
 
     </Grid>
 </UserControl>

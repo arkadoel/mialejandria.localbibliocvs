@@ -66,11 +66,19 @@ namespace mialejandria.localbibliocvs.bandeja
             {
                 App.mainWindow.Show();
                 secciones.blog b = new secciones.blog();
+
+                System.Windows.Window win = new System.Windows.Window();
+                win.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+                win.Height = 500;
+                win.Width = 700;
+                win.Title = "Blog Descubriendo Mi Alejandria";
+                win.Content = new System.Windows.Controls.Grid();
+                (win.Content as System.Windows.Controls.Grid).Children.Add(b);
+                var u = new UriBuilder("www.mialejandria.blogspot.com?m=1");
+                b.navegador.Navigate(u.Uri, UriKind.RelativeOrAbsolute);
+                win.Show();
                 
-                App.mainWindow.navegador.Children.Clear();
-                App.mainWindow.navegador.Children.Add(b);
-                b.navegador.Navigate("http://mialejandria.blogspot.com?m=1");
-                
+
             }
         #endregion
 

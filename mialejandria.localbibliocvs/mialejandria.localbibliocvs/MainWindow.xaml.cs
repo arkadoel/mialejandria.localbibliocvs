@@ -40,7 +40,6 @@ namespace mialejandria.localbibliocvs
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            nar.Navigate("http://mialejandria.blogspot.com?m=1");
             //hola
         }
     }
