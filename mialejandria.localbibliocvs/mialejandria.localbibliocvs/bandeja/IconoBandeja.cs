@@ -51,10 +51,10 @@ namespace mialejandria.localbibliocvs.bandeja
         /// </summary>
         /// <param name="titulo"></param>
         /// <param name="mensaje"></param>
-        public void mostrarMensaje(string titulo, string mensaje)
+        public void mostrarMensaje(string titulo, string mensaje, int tiempo)
         {            
             icono.Icon = new System.Drawing.Icon(".\\icono.ico");
-            icono.ShowBalloonTip(100, titulo, mensaje, ToolTipIcon.Info);
+            icono.ShowBalloonTip(tiempo, titulo, mensaje, ToolTipIcon.Info);
         }
 
         #region "Eventos de los menus"

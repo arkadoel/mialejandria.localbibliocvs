@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="GestionarXML.cs" />
     <Compile Include="GestionConf.cs" />
+    <Compile Include="git\BotLocalGit.cs" />
     <Compile Include="git\Repositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="reloj.cs" />

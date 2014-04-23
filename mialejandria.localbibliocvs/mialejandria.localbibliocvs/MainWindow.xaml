@@ -5,6 +5,6 @@
         Title="MainWindow" Height="550" Width="750" Background="Gainsboro">
     <Grid Name="controles">
         <Grid Margin="10,42,10,10" Name="navegador" />
-        <menu:menu HorizontalAlignment="Left" x:Name="mnuApp" VerticalAlignment="Top" Height="60"/>
+        <menu:menu HorizontalAlignment="Left" x:Name="mnuApp" VerticalAlignment="Top" Height="30"/>
     </Grid>
 </Window>

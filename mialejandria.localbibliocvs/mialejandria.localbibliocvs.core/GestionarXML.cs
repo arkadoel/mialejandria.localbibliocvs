@@ -33,13 +33,16 @@ namespace mialejandria.localbibliocvs.core
 
         /// <summary>
         /// Obtener los repositorios guardados en el 
-        /// archivo de configuracion
+        /// archivo de configuracion.
+        /// De momento se establece que habra un repositorio en el 
+        /// directorio personal del usuario
         /// </summary>
         /// <returns></returns>
         public static void CargarReposEnConfig()
         {
-            XDocument doc = CargaXMLConfiguracion();
             List<git.Repositorio> lista = new List<git.Repositorio>();
+            /*XDocument doc = CargaXMLConfiguracion();
+            
             var repos = from u in doc.Elements("conf").Elements("Repos").Elements()
                         select u;
 
@@ -56,7 +59,12 @@ namespace mialejandria.localbibliocvs.core
 
             GestionConf.Repositorios = lista;
             LiberarMemoria(doc);
+            */
             
+            git.Repositorio repo = new git.Repositorio(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),true);
+            lista.Add(repo);
+            GestionConf.Repositorios = lista;
+
         }
 
         /// <summary>

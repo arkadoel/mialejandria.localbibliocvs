@@ -32,6 +32,7 @@ namespace mialejandria.localbibliocvs
         /// </summary>
         public static void CerrarAplicacion()
         {
+            HiloReloj.Abort();
             App.Current.Shutdown(0);
         }
 
@@ -48,7 +49,7 @@ namespace mialejandria.localbibliocvs
 
             //lanzar icono de la barra de tareas
             bandeja.IconoBandeja icono = new bandeja.IconoBandeja();
-            icono.mostrarMensaje(App.NombreConVersion(), "Aplicacion iniciada");
+            icono.mostrarMensaje(App.NombreConVersion(), "Aplicacion iniciada",10);
             
             //enlace para manejar el hilo del reloj
             Thread hilo = new Thread(new ThreadStart(core.reloj.ejecutarReloj));
