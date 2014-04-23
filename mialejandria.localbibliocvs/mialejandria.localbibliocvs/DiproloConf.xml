@@ -3,8 +3,8 @@
   <Repos>
     <Repo path="c:\prueba" name="Repositorio1" />
   </Repos>
-  <Tareas>
-    <tarea nombre="tarea 1"
+  <TareasReloj>
+    <Tarea nombre="tarea 1"
            hora="19:50" 
            lunes="true" 
            martes="true"
@@ -13,7 +13,7 @@
            viernes="true"
            sabado="true"
            domingo="true">       
-    </tarea>    
-  </Tareas>
+    </Tarea>    
+  </TareasReloj>
   <Git userName="Arkadoel" userEmail="arkadoel@hotmail.com"></Git>
 </conf>

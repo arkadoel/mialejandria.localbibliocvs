@@ -75,25 +75,25 @@ namespace mialejandria.localbibliocvs.core
         public static void CargarTareasEnConfig()
         {
             XDocument doc = CargaXMLConfiguracion();
-            List<Tarea> lista = new List<Tarea>();
-            var tars = from u in doc.Elements("conf").Elements("Tareas").Elements()
+            List<TareaReloj> lista = new List<TareaReloj>();
+            var tars = from u in doc.Elements("conf").Elements("TareasReloj").Elements()
                         select u;
 
             if (tars != null)
             {
-                Tarea t = null;
+                TareaReloj t = null;
                 foreach (var elemento in tars)
                 {
-                    t = new Tarea();
+                    t = new TareaReloj();
                     t.Nombre = elemento.Attribute("nombre").Value.ToString();
                     t.Hora = elemento.Attribute("hora").Value.ToString();
-                    t.lunes = Tarea.stringToBool(elemento.Attribute("lunes").Value.ToString());
-                    t.martes = Tarea.stringToBool(elemento.Attribute("martes").Value.ToString());
-                    t.miercoles = Tarea.stringToBool(elemento.Attribute("miercoles").Value.ToString());
-                    t.jueves = Tarea.stringToBool(elemento.Attribute("jueves").Value.ToString());
-                    t.viernes = Tarea.stringToBool(elemento.Attribute("viernes").Value.ToString());
-                    t.sabado = Tarea.stringToBool(elemento.Attribute("sabado").Value.ToString());
-                    t.domingo = Tarea.stringToBool(elemento.Attribute("domingo").Value.ToString());
+                    t.lunes = TareaReloj.stringToBool(elemento.Attribute("lunes").Value.ToString());
+                    t.martes = TareaReloj.stringToBool(elemento.Attribute("martes").Value.ToString());
+                    t.miercoles = TareaReloj.stringToBool(elemento.Attribute("miercoles").Value.ToString());
+                    t.jueves = TareaReloj.stringToBool(elemento.Attribute("jueves").Value.ToString());
+                    t.viernes = TareaReloj.stringToBool(elemento.Attribute("viernes").Value.ToString());
+                    t.sabado = TareaReloj.stringToBool(elemento.Attribute("sabado").Value.ToString());
+                    t.domingo = TareaReloj.stringToBool(elemento.Attribute("domingo").Value.ToString());
 
                     lista.Add(t);
                 }
@@ -109,13 +109,40 @@ namespace mialejandria.localbibliocvs.core
         public static void CargarUsuarioGit()
         {
             XDocument doc = CargaXMLConfiguracion();
-            List<Tarea> lista = new List<Tarea>();
+            List<TareaReloj> lista = new List<TareaReloj>();
             string nombre = doc.Elements("conf").Elements("Git").First().Attribute("userName").Value.ToString();
             string email = doc.Elements("conf").Elements("Git").First().Attribute("userEmail").Value.ToString();
 
             GestionConf.GIT_USER = nombre;
             GestionConf.GIT_EMAIL = email;
             LiberarMemoria(doc);
+        }
+
+        public static bool GuardarUsuarioGit(string nombre, string email)
+        {
+            try
+            {
+                XDocument doc = CargaXMLConfiguracion();
+
+                if (string.IsNullOrWhiteSpace(nombre) == false)
+                {
+                    doc.Elements("conf").Elements("Git").First().Attribute("userName").SetValue(nombre);
+                }
+                if (string.IsNullOrWhiteSpace(email) == false)
+                {
+                    doc.Elements("conf").Elements("Git").First().Attribute("userEmail").Value = email;
+                }
+
+                doc.Save(ArchivoConfiguracion);
+                LiberarMemoria(doc);
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

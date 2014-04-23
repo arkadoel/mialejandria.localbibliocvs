@@ -11,11 +11,20 @@ namespace mialejandria.localbibliocvs.core
 {
     public class GestionConf
     {
-        public static List<Tarea> Tareas { get; set; }
+        public static List<TareaReloj> Tareas { get; set; }
         public static List<git.Repositorio> Repositorios { get; set; }
         public static string GIT_USER { get; set; }
         public static string GIT_EMAIL { get; set; }
 
+        /// <summary>
+        /// carga los datos iniciales de la aplicaicon
+        /// </summary>
+        public static void CargarDatosConfiguracion()
+        {
+            core.GestionarXML.CargarReposEnConfig();
+            core.GestionarXML.CargarTareasEnConfig();
+            core.GestionarXML.CargarUsuarioGit();
+        }
 
         /// <summary>
         /// Coloca una ventana en la zona inferior derecha de la pantalla

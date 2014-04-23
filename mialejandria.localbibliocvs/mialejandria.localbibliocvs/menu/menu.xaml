@@ -9,6 +9,22 @@
         <Grid.Effect>
             <DropShadowEffect RenderingBias="Performance" Color="Black" Direction="-90" BlurRadius="10" ShadowDepth="10" />
         </Grid.Effect>
-        <Label Content="Menu" FontWeight="Black" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="90" Name="lblMenu"/>
+        <Label Content="Menu" FontWeight="Black" HorizontalAlignment="Left" Margin="5,0,0,0" FontSize="16" VerticalAlignment="Top" Width="90" Name="lblMenu"/>
+        <Label Content="Configuración" HorizontalAlignment="Left" Name="lblConfiguracion" Margin="526,35,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
+            </Label.Effect>    
+        </Label>
+        <Label Content="Blog" HorizontalAlignment="Left" Name="lblBlog" Margin="450,35,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
+            </Label.Effect>
+        </Label>
+        <Label Content="Mis Tareas" HorizontalAlignment="Left" Name="lblTareas" Margin="326,35,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
+            </Label.Effect>
+        </Label>
+
     </Grid>
 </UserControl>

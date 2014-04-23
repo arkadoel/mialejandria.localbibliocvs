@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mialejandria.localbibliocvs.core
 {
-    public class Tarea
+    public class TareaReloj
     {
         public string Nombre { get; set; }
         public string Hora { get; set; }
@@ -17,7 +17,7 @@ namespace mialejandria.localbibliocvs.core
         public bool sabado { get; set; }
         public bool domingo { get; set; }
 
-        public Tarea()
+        public TareaReloj()
         {
         }
 

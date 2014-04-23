@@ -44,8 +44,7 @@ namespace mialejandria.localbibliocvs
         {
 
             //tareas iniciales
-            core.GestionarXML.CargarReposEnConfig();
-            core.GestionarXML.CargarTareasEnConfig();
+            core.GestionConf.CargarDatosConfiguracion();
 
             //lanzar icono de la barra de tareas
             bandeja.IconoBandeja icono = new bandeja.IconoBandeja();

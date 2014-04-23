@@ -27,8 +27,19 @@ namespace mialejandria.localbibliocvs.secciones
 
         void Configuracion_Loaded(object sender, RoutedEventArgs e)
         {
+            core.GestionConf.CargarDatosConfiguracion();
             txtNombre.Text = core.GestionConf.GIT_USER;
             txtEmail.Text = core.GestionConf.GIT_EMAIL;
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            bool correcto = core.GestionarXML.GuardarUsuarioGit(txtNombre.Text, txtEmail.Text);
+
+            if (correcto)
+            {
+                MessageBox.Show("Datos guardados con exito","Exito");
+            }
         }
     }
 }

@@ -37,7 +37,7 @@ namespace mialejandria.localbibliocvs
         public static void CerrarPanel(UserControl control, int min, int max)
         {
             double tActual = control.Height;
-            for (int i = max; i >= min; i -= 1)
+            for (int i = max; i >= min; i -= 3)
             {
                 control.Height = i;
                 //core.GestionConf.DoEvents(control.Dispatcher);

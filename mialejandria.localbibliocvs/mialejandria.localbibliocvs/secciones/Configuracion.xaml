@@ -15,5 +15,7 @@
         <Label Content="Email para Git: " HorizontalAlignment="Left" Margin="40,82,0,0" Height="25" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="25" Margin="149,52,0,0" BorderBrush="Gray"  Text="" x:Name="txtNombre" VerticalAlignment="Top" Width="214"/>
         <TextBox HorizontalAlignment="Left" Height="25" Margin="149,82,0,0" BorderBrush="Gray"   Text="" x:Name="txtEmail" VerticalAlignment="Top" Width="389"/>
+        <Button Content="Guardar cambios" HorizontalAlignment="Left" Margin="520,428,0,0" Name="btnGuardar" Click="btnGuardar_Click" VerticalAlignment="Top" Width="136" Height="30"/>
+
     </Grid>
 </UserControl>

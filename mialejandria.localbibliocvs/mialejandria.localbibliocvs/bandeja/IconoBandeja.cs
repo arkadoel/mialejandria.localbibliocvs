@@ -21,8 +21,9 @@ namespace mialejandria.localbibliocvs.bandeja
             MenuItem mnuSalir = new MenuItem("Salir",mnuSalir_Click);
             MenuItem mnuConfiguracion = new MenuItem("Configuracion", mnuConfiguracion_Click);
             MenuItem mnuBlog = new MenuItem("Blog", mnuBlog_Click);
+            MenuItem mnuTareas = new MenuItem("Mis Tareas", mnuTareas_Click);
 
-
+            MenuIcono.MenuItems.Add(mnuTareas);
             MenuIcono.MenuItems.Add(mnuBlog);
             MenuIcono.MenuItems.Add(new MenuItem("-"));
             MenuIcono.MenuItems.Add(mnuConfiguracion);
@@ -32,6 +33,8 @@ namespace mialejandria.localbibliocvs.bandeja
             
             icono.MouseClick += icono_MouseClick;
         }
+
+        
 
         void icono_MouseClick(object sender, MouseEventArgs e)
         {
@@ -60,28 +63,17 @@ namespace mialejandria.localbibliocvs.bandeja
 
             void mnuConfiguracion_Click(object sender, EventArgs e)
             {
-                secciones.Configuracion c = new secciones.Configuracion();
-                App.mainWindow.navegador.Children.Clear();
-                App.mainWindow.navegador.Children.Add(c);
-                App.mainWindow.Show();
+               App.mainWindow.mnuApp.IrA_Cofiguracion();
             }
+            
             void mnuBlog_Click(object sender, EventArgs e)
             {
-                App.mainWindow.Show();
-                secciones.blog b = new secciones.blog();
+                App.mainWindow.mnuApp.IrA_navegador();
+            }
 
-                System.Windows.Window win = new System.Windows.Window();
-                win.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-                win.Height = 500;
-                win.Width = 700;
-                win.Title = "Blog Descubriendo Mi Alejandria";
-                win.Content = new System.Windows.Controls.Grid();
-                (win.Content as System.Windows.Controls.Grid).Children.Add(b);
-                var u = new UriBuilder("www.mialejandria.blogspot.com?m=1");
-                b.navegador.Navigate(u.Uri, UriKind.RelativeOrAbsolute);
-                win.Show();
-                
-
+            void mnuTareas_Click(object sender, EventArgs e)
+            {
+                App.mainWindow.mnuApp.IrA_Tareas();
             }
         #endregion
 
