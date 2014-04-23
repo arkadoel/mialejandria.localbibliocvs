@@ -21,9 +21,11 @@ namespace mialejandria.localbibliocvs.bandeja
             MenuItem mnuSalir = new MenuItem("Salir",mnuSalir_Click);
             MenuItem mnuConfiguracion = new MenuItem("Configuracion", mnuConfiguracion_Click);
             MenuItem mnuBlog = new MenuItem("Blog", mnuBlog_Click);
-            MenuItem mnuTareas = new MenuItem("Mis Tareas", mnuTareas_Click);
+            MenuItem mnuTareas = new MenuItem("Mis tareas personales", mnuTareas_Click);
+            MenuItem mnuDiario = new MenuItem("Ver diario", mnuDiario_Click);
 
             MenuIcono.MenuItems.Add(mnuTareas);
+            MenuIcono.MenuItems.Add(mnuDiario);
             MenuIcono.MenuItems.Add(mnuBlog);
             MenuIcono.MenuItems.Add(new MenuItem("-"));
             MenuIcono.MenuItems.Add(mnuConfiguracion);
@@ -74,6 +76,11 @@ namespace mialejandria.localbibliocvs.bandeja
             void mnuTareas_Click(object sender, EventArgs e)
             {
                 App.mainWindow.mnuApp.IrA_Tareas();
+            }
+
+            void mnuDiario_Click(object sender, EventArgs e)
+            {
+                App.mainWindow.mnuApp.IrA_Diario();
             }
         #endregion
 

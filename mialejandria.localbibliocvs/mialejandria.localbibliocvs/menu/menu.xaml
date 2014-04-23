@@ -4,23 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" MinHeight="60"
-             Height="300" Width="700" Background="{x:Null}">
-    <Grid Margin="15" Background="Gainsboro" Name="fondo">
+             Height="220" Width="231" Background="{x:Null}">
+    <Grid Margin="15"  Name="fondo">
         <Grid.Effect>
             <DropShadowEffect RenderingBias="Performance" Color="Black" Direction="-90" BlurRadius="10" ShadowDepth="10" />
         </Grid.Effect>
+        <Rectangle Fill="Gainsboro" RadiusX="10" RadiusY="10">
+            
+        </Rectangle>
         <Label Content="Menu" FontWeight="Black" HorizontalAlignment="Left" Margin="5,0,0,0" FontSize="16" VerticalAlignment="Top" Width="90" Name="lblMenu"/>
-        <Label Content="Configuración" HorizontalAlignment="Left" Name="lblConfiguracion" Margin="526,35,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
-            <Label.Effect>
-                <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
-            </Label.Effect>    
-        </Label>
-        <Label Content="Blog" HorizontalAlignment="Left" Name="lblBlog" Margin="450,35,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
+        <Label Content="Configuración" HorizontalAlignment="Left" Name="lblConfiguracion" Margin="58,138,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" Width="142" >
             <Label.Effect>
                 <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
             </Label.Effect>
         </Label>
-        <Label Content="Mis Tareas" HorizontalAlignment="Left" Name="lblTareas" Margin="326,35,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
+        <Label Content="Blog" HorizontalAlignment="Left" Name="lblBlog" Margin="58,102,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
+            </Label.Effect>
+        </Label>
+        <Label Content="Mis Tareas" HorizontalAlignment="Left" Name="lblTareas" Margin="58,71,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
+            </Label.Effect>
+        </Label>
+        <Label Content="Ver Diario" HorizontalAlignment="Left" Name="lblDiario" Margin="58,40,0,0" FontSize="16" VerticalAlignment="Top" MouseLeftButtonDown="MenuSeleccionado" >
             <Label.Effect>
                 <DropShadowEffect ShadowDepth="0" RenderingBias="Performance" />
             </Label.Effect>

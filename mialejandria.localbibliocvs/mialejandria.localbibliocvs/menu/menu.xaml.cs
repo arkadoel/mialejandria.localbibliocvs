@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,7 +23,7 @@ namespace mialejandria.localbibliocvs.menu
     /// </summary>
     public partial class menu : UserControl
     {
-        public const int TAM_MAX = 150;
+        public const int TAM_MAX = 220;
         public const int TAM_MIN = 60;
         private DropShadowEffect sombra { get; set; }
         
@@ -44,6 +46,9 @@ namespace mialejandria.localbibliocvs.menu
             this.lblTareas.MouseLeave += Efectos.Label_MouseLeave;
             this.lblBlog.MouseEnter += Efectos.Label_MouseEnter;
             this.lblBlog.MouseLeave += Efectos.Label_MouseLeave;
+            this.lblDiario.MouseEnter += Efectos.Label_MouseEnter;
+            this.lblDiario.MouseLeave += Efectos.Label_MouseLeave;
+        
         }
 
         void menu_Loaded(object sender, RoutedEventArgs e)
@@ -94,10 +99,16 @@ namespace mialejandria.localbibliocvs.menu
                 case "Tareas":
                     IrA_Tareas();
                     break;
+                case "Diario":
+                    IrA_Diario();
+                    break;
             }
             CerrarMenu();
         }
 
+        /// <summary>
+        /// Permite ver la zona de tareas privadas del programador
+        /// </summary>
         public void IrA_Tareas()
         {
             secciones.GestorTareas c = new secciones.GestorTareas();
@@ -111,19 +122,11 @@ namespace mialejandria.localbibliocvs.menu
         /// </summary>
         public void IrA_navegador()
         {
-            App.mainWindow.Show();            
-            secciones.blog b = new secciones.blog();
+            string url ="www.mialejandria.blogspot.com?m=1";
+            //var u = new UriBuilder(url);
 
-            System.Windows.Window win = new System.Windows.Window();
-            win.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            win.Height = 500;
-            win.Width = 700;
-            win.Title = "Blog Descubriendo Mi Alejandria";
-            win.Content = new System.Windows.Controls.Grid();
-            (win.Content as System.Windows.Controls.Grid).Children.Add(b);
-            var u = new UriBuilder("www.mialejandria.blogspot.com?m=1");
-            b.navegador.Navigate(u.Uri, UriKind.RelativeOrAbsolute);
-            win.Show();
+            System.Diagnostics.Process.Start(url);
+            GC.Collect();
         }
 
         /// <summary>
@@ -132,6 +135,17 @@ namespace mialejandria.localbibliocvs.menu
         public void IrA_Cofiguracion()
         {
             secciones.Configuracion c = new secciones.Configuracion();
+            App.mainWindow.navegador.Children.Clear();
+            App.mainWindow.navegador.Children.Add(c);
+            App.mainWindow.Show();
+        }
+
+        /// <summary>
+        /// Permite ver la zona de diario de la aplicacion
+        /// </summary>
+        public void IrA_Diario()
+        {
+            secciones.VerDiario.Diario c = new secciones.VerDiario.Diario();
             App.mainWindow.navegador.Children.Clear();
             App.mainWindow.navegador.Children.Add(c);
             App.mainWindow.Show();

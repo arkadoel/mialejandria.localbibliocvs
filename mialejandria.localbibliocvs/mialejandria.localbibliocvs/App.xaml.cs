@@ -16,7 +16,7 @@ namespace mialejandria.localbibliocvs
     {
         //Constantes y variables de la aplicacion
 
-        public const string APP_NAME = "Diario de programacion local"; //diario de programacion local
+        public const string APP_NAME = "Diario de programacion"; //diario de programacion local
         public const string APP_VERSION = "Alpha 0.2014.4.8";
         public static MainWindow mainWindow { get; set; }
         public static Thread HiloReloj { get; set; }
@@ -24,7 +24,7 @@ namespace mialejandria.localbibliocvs
 
         public static string NombreConVersion()
         {
-            return APP_NAME + " " + APP_VERSION;
+            return APP_NAME + " (" + APP_VERSION + ")";
         }
 
         /// <summary>

@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace mialejandria.localbibliocvs.secciones
+namespace mialejandria.localbibliocvs.secciones.VerDiario
 {
     /// <summary>
-    /// Lógica de interacción para blog.xaml
+    /// Lógica de interacción para Diario.xaml
     /// </summary>
-    public partial class blog : UserControl
+    public partial class Diario : UserControl
     {
-        public blog()
+        public Diario()
         {
             InitializeComponent();
         }

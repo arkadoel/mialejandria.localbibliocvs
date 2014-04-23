@@ -61,14 +61,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Efectos.cs" />
-    <Compile Include="secciones\blog.xaml.cs">
-      <DependentUpon>blog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="secciones\Configuracion.xaml.cs">
       <DependentUpon>Configuracion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="secciones\GestorTareas.xaml.cs">
+    <Compile Include="secciones\GestorTareas\GestorTareas.xaml.cs">
       <DependentUpon>GestorTareas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="secciones\VerDiario\Diario.xaml.cs">
+      <DependentUpon>Diario.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,15 +87,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="secciones\blog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="secciones\Configuracion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="secciones\GestorTareas.xaml">
+    <Page Include="secciones\GestorTareas\GestorTareas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="secciones\VerDiario\Diario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,6 +141,7 @@
       <Name>mialejandria.localbibliocvs.core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
