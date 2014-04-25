@@ -37,7 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CAMBIOS.md" />
     <None Include="Ideas iniciales.docx" />
+    <None Include="PackageManager.docx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mialejandria.localbibliocvs.core\mialejandria.localbibliocvs.core.csproj">
