@@ -42,13 +42,14 @@ namespace mialejandria.localbibliocvs.core.git
                     FileInfo[] files = dir.GetFiles();
                     foreach (FileInfo file in files)
                     {
-                        Console.WriteLine("\tAgregado al lista: " + file.Name.ToString());
+                        //Console.WriteLine("\tAgregado al lista: " + file.Name.ToString());
                         //string temppath = Path.Combine(dirDestino, file.Name);
                         //file.CopyTo(temppath, true);
 
-                        if (git.Repositorio.extensionesPermitidas(file.Extension, null))
+                        //if (git.Repositorio.extensionesPermitidas(file.Extension, null))
                         {
                             ArchivosParaGuardar.Add(file.FullName);
+                            
                         }
 
                     }
@@ -58,12 +59,15 @@ namespace mialejandria.localbibliocvs.core.git
                     {
                         foreach (DirectoryInfo subdir in dirs)
                         {
-                            Console.WriteLine("\tCopiando Directorio: " + subdir.Name.ToString());
-                            //string tempPath = Path.Combine(dirDestino, subdir.Name);
+                            if (subdir.Name.Contains("AppData") == false && subdir.Name.Contains(".git") == false)
+                            {
+                                Console.WriteLine("\tRevisando Directorio: " + subdir.FullName.ToString());
+                                //string tempPath = Path.Combine(dirDestino, subdir.Name);
 
 
-                            //copiar recursivamente
-                            SearchFilesToControl(subdir.FullName, recursivo);
+                                //copiar recursivamente
+                                SearchFilesToControl(subdir.FullName, recursivo);
+                            }
                         }
                     }
                 }

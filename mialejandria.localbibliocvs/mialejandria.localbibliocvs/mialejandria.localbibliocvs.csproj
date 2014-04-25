@@ -60,6 +60,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controles\ctrlCommit.xaml.cs">
+      <DependentUpon>ctrlCommit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\VisorRamas.xaml.cs">
+      <DependentUpon>VisorRamas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Efectos.cs" />
     <Compile Include="secciones\Configuracion.xaml.cs">
       <DependentUpon>Configuracion.xaml</DependentUpon>
@@ -70,6 +76,14 @@
     <Compile Include="secciones\VerDiario\Diario.xaml.cs">
       <DependentUpon>Diario.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controles\ctrlCommit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\VisorRamas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

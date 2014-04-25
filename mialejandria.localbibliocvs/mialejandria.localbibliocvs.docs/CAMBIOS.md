@@ -7,3 +7,6 @@ Documento para resumir cambios
 
  
 >Se comienza a crear sistema para gestion de paquetes para que sirva como instalador.
+
+*27 Abril
+>Fer --> No hace el stage all correctamente, seguramente haya que hacerlo archivo por archivo

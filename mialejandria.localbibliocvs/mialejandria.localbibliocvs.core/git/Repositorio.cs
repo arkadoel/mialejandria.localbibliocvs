@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using LibGit2Sharp;
 using System.IO;
+using System.Collections;
 
 namespace mialejandria.localbibliocvs.core.git
 {
@@ -19,6 +20,37 @@ namespace mialejandria.localbibliocvs.core.git
         {
             Repo = new Repository(ruta);
             Path = ruta;
+        }
+
+        /// <summary>
+        /// Elemento resumido de como es un commit
+        /// </summary>
+        public class CommitShortInfo
+        {
+            public string ID { get; set; }
+            public string Autor { get; set; }
+            public DateTime Fecha { get; set; }
+            public string RepoPath { get; set; }
+            public string Mensaje { get; set; }
+        }
+
+        /// <summary>
+        /// Transforma un commit normal en commitShortInfo
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static CommitShortInfo toCommitShortInfo(Commit c)
+        {
+            if (c != null)
+            {
+                CommitShortInfo csi = new CommitShortInfo();
+                csi.ID = c.Id.Sha;
+                csi.Autor = c.Author.Name;
+                csi.Fecha = c.Committer.When.DateTime;
+                csi.Mensaje = c.MessageShort;
+                return csi;
+            }
+            else return null;
         }
 
         /// <summary>
@@ -132,12 +164,20 @@ namespace mialejandria.localbibliocvs.core.git
         public RepositoryStatus getStatus()
         {
             //feed.Logs.WriteText("Get status", "Se obtiene el status de " + NombreProyecto);
-            if (esRepositorioIniciado())
+            try
             {
-                Repo = new Repository(Path);
-                return Repo.Index.RetrieveStatus();
+                if (esRepositorioIniciado())
+                {
+                    Repo = new Repository(Path);
+                    StatusOptions op = new StatusOptions();
+
+                    return Repo.Index.RetrieveStatus();
+                }
+                else return null;
             }
-            else return null;
+            catch {
+                return null;
+            }
         }
 
         /// <summary>
@@ -145,25 +185,34 @@ namespace mialejandria.localbibliocvs.core.git
         /// </summary>
         public void git_stage_all()
         {
-            RepositoryStatus status = getStatus();
-            if (status.Modified.Count() > 0 || status.Untracked.Count() > 0)
-            {
-                foreach (var archivo in status)
+             
+                RepositoryStatus status = getStatus();
+                Console.WriteLine("stage..");
+                if (status != null)
                 {
-                    try
+                    Console.WriteLine("status NOT null..");
+                    if (status.Modified.Count() > 0 || status.Untracked.Count() > 0)
                     {
-                        if (extensionesPermitidas(archivo.FilePath, null))
+                        StatusEntry archivo = null;
+
+                        for (int i = 0; i < status.Count() - 1; i++)
                         {
-                            Repo.Index.Stage(archivo.FilePath);
+                            try
+                            {
+                                archivo = status.ElementAt(i);
+                                Repo.Index.Stage(archivo.FilePath);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("Error en git_stage_all: " + ex.Message);
+                                Console.ForegroundColor = ConsoleColor.White;
+
+                            } //ignorar errores y seguir
+
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        //feed.Logs.WriteError("Error en git_stage_all", ex);
-                    } //ignorar errores y seguir
-
                 }
-            }
         }
 
         /// <summary>
@@ -245,5 +294,86 @@ namespace mialejandria.localbibliocvs.core.git
             catch { }
         }
 
+        public Branch getRama(string name)
+        {
+            Branch rama = null;
+            var ramas = from r in Repo.Branches
+                   where r.Name.Contains(name) == true
+                   select r;
+
+            if (ramas.Count() > 0)
+            {
+                rama = ramas.First();
+            }
+
+            return rama;
+        }
+
+        public List<CommitShortInfo> listarCommitsRama(string branchName)
+        {
+            return listarCommitsRama(branchName, -1);
+        }
+
+        public List<CommitShortInfo> listarCommitsRama(string branchName, int TOP)
+        {
+            List<CommitShortInfo> lista = new List<CommitShortInfo>();
+            Branch rama = getRama(branchName);
+
+            if (rama != null)
+            {
+                if (TOP == -1)
+                {
+                    var grupo = (from c in rama.Commits
+                                 select new
+                                 {
+                                     autor = c.Author.Name,
+                                     id = c.Id.Sha,
+                                     fecha = c.Committer.When,
+                                     mensaje = c.Message
+                                 });
+
+                    CommitShortInfo cinfo = null;
+
+                    foreach (var commit in grupo)
+                    {
+                        cinfo = new CommitShortInfo();
+                        cinfo.Autor = commit.autor;
+                        cinfo.Fecha = commit.fecha.DateTime;
+                        cinfo.ID = commit.id;
+                        cinfo.RepoPath = this.Path;
+                        cinfo.Mensaje = commit.mensaje;
+                        lista.Add(cinfo);
+                    }
+                }
+                else
+                {
+                    var grupo = (from c in rama.Commits
+                                 select new
+                                 {
+                                     autor = c.Author.Name,
+                                     id = c.Id.Sha,
+                                     fecha = c.Committer.When,
+                                     mensaje = c.Message
+                                 }).Take(TOP);
+
+                    CommitShortInfo cinfo = null;
+
+                    foreach (var commit in grupo)
+                    {
+                        cinfo = new CommitShortInfo();
+                        cinfo.Autor = commit.autor;
+                        cinfo.Fecha = commit.fecha.DateTime;
+                        cinfo.ID = commit.id;
+                        cinfo.RepoPath = this.Path;
+                        cinfo.Mensaje = commit.mensaje;
+                        lista.Add(cinfo);
+                    }
+
+                }
+            }
+            
+
+            return lista;
+        }
     }
 }
