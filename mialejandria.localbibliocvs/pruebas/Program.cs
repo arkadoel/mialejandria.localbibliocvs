@@ -26,6 +26,13 @@ namespace pruebas
 
             EstadisticasDe("Arkadoel", "master");
 
+            Tree t1 = repo.getRama("master").Commits.First().Tree;
+            Tree t2 = repo.getRama("master").Commits.Last().Tree;
+
+            var changes = repo.Repo.Diff.Compare<Patch>(t1, t2);
+            changes.First().Patch.ToString();
+            
+
             Console.Read();
         }
 

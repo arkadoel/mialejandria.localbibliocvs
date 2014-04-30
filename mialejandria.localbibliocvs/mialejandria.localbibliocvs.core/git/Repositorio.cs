@@ -77,14 +77,14 @@ namespace mialejandria.localbibliocvs.core.git
         /// <param name="commitID1"></param>
         /// <param name="commitID2"></param>
         /// <returns></returns>
-        public TreeChanges VerCambios(string commitID1, string commitID2)
+        public TreeChanges VerCambios(string cPadre, string cHijo)
         {
            // feed.Logs.WriteText("Ver cambios", "Se desea ver los cambios del proyecto " + NombreProyecto);
-            Tree t1 = Repo.Lookup<Commit>(commitID1).Tree;
-            Tree t2 = Repo.Lookup<Commit>(commitID2).Tree;
+            Tree t1 = Repo.Lookup<Commit>(cPadre).Tree;
+            Tree t2 = Repo.Lookup<Commit>(cHijo).Tree;
 
             var changes = Repo.Diff.Compare<TreeChanges>(t1, t2);
-            var stats = Repo.Diff.Compare<PatchStats>(t1, t2);
+            
             return changes;
         }
 
@@ -94,14 +94,14 @@ namespace mialejandria.localbibliocvs.core.git
         /// <param name="commitID1"></param>
         /// <param name="commitID2"></param>
         /// <returns></returns>
-        public PatchStats VerEstadisticaCambios(string commitID1, string commitID2)
+        public PatchStats VerEstadisticaCambios(string cPadre, string cHijo)
         {
             // feed.Logs.WriteText("Ver cambios", "Se desea ver los cambios del proyecto " + NombreProyecto);
-            Tree t1 = Repo.Lookup<Commit>(commitID1).Tree;
-            Tree t2 = Repo.Lookup<Commit>(commitID2).Tree;
+            Tree t1 = Repo.Lookup<Commit>(cPadre).Tree;
+            Tree t2 = Repo.Lookup<Commit>(cHijo).Tree;
 
             var stats = Repo.Diff.Compare<PatchStats>(t1, t2);
-            
+           
             return stats;
         }
 
@@ -155,6 +155,69 @@ namespace mialejandria.localbibliocvs.core.git
         {
             //feed.Logs.WriteText("Get commit by ID", "Se obtiene un commit de " + NombreProyecto);
             return Repo.Lookup<Commit>(id);
+        }
+
+        /// <summary>
+        /// Obtiene los cambios entre un commit hijo y un commit padre 
+        /// solo pasando el commit actual
+        /// </summary>
+        /// <param name="commitId"></param>
+        /// <returns></returns>
+        public TreeChanges ObtenerCambiosConPadre(string commitId)
+        {
+            Commit chijo = getCommitByID(commitId);
+            Commit cpadre = null;
+
+            if (chijo != null)
+            {
+                cpadre = chijo.Parents.First();
+            }
+
+            if (cpadre != null)
+            {
+                return VerCambios(cpadre.Id.Sha, chijo.Id.Sha);
+            }
+            else return null;
+        }
+
+        /// <summary>
+        /// Obtiene los cambios entre un commit hijo y un commit padre 
+        /// solo pasando el commit actual
+        /// </summary>
+        /// <param name="commitId"></param>
+        /// <returns></returns>
+        public Patch ObtenerDifCodigoConPadre(string commitId)
+        {
+            Commit chijo = getCommitByID(commitId);
+            Commit cpadre = null;
+
+            if (chijo != null)
+            {
+                if (chijo.Parents != null)
+                {
+                    if (chijo.Parents.Count() >= 0)
+                    {
+                        cpadre = chijo.Parents.First();
+                    }
+                }
+            }
+
+            if (cpadre != null)
+            {
+                // feed.Logs.WriteText("Ver cambios", "Se desea ver los cambios del proyecto " + NombreProyecto);
+                Tree t1 = cpadre.Tree;
+                Tree t2 = chijo.Tree;
+
+                var stats = Repo.Diff.Compare<Patch>(t1, t2);
+                return stats;
+            }
+            else return null;
+        }
+
+
+        public List<string> ListaArchivosCambios()
+        {
+            return null;
         }
 
         /// <summary>

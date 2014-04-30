@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="200">
+             Height="300" Width="300">
     <Grid>
-        <Rectangle Fill="#FF307272" RadiusX="10" Stroke="White" StrokeThickness="2" RadiusY="10" HorizontalAlignment="Left" Height="50" Margin="49,43,0,0" VerticalAlignment="Top" Width="100"/>
+        <Rectangle x:Name="lineaIzq" Fill="White" Height="30" Opacity="0.8" Margin="-1,54,164,216"/>
+        <Rectangle x:Name="lineaDrch" Fill="White" Height="30" Opacity="0.8" Margin="164,54,0,216"/>
+        <Rectangle Fill="#FF307272" RadiusX="10" Stroke="White" StrokeThickness="2" RadiusY="10" HorizontalAlignment="Left" Height="50" Margin="34,44,0,0" VerticalAlignment="Top" Width="223" x:Name="BotonCommit"/>
+        <Rectangle x:Name="fondoDescrip" Fill="#FFECEC5F" HorizontalAlignment="Left" Stroke="Black" StrokeThickness="2" RadiusX="10" RadiusY="10" Opacity="0.8" Height="126" Margin="10,94,0,0" VerticalAlignment="Top" Width="280"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="16"  Height="120" Margin="18,100,0,0" Background="{x:Null}" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Name="txtDescripcion" Width="263"/>
+        <Label Content="23-mar-2014 22:03:50" Foreground="White" FontWeight="Medium" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="35" Margin="34,49,0,0" Name="lblFecha" VerticalAlignment="Top" Width="223"/>
 
     </Grid>
 </UserControl>

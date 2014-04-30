@@ -7,13 +7,24 @@
              mc:Ignorable="d" 
              MinHeight="500" MinWidth="700" Background="Gainsboro">
     <Grid>
-        <Label Height="50" Width="214" FontSize="16" Content="Diario de programación" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+        <Label Height="41" Width="214" FontSize="16" Content="Diario de programación" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <Label.Effect>
                 <DropShadowEffect RenderingBias="Performance" ShadowDepth="0" />
             </Label.Effect>
         </Label>
 
-        <Controles:VisorRamas HorizontalAlignment="Left" Margin="78,65,0,0" VerticalAlignment="Top"/>
-
+        <Controles:VisorRamas x:Name="visorRamas" Margin="10,30,10,0" VerticalAlignment="Top" Width="Auto" Height="254"/>
+        <RichTextBox Name="txt"  IsReadOnly="True" BorderBrush="{x:Null}" BorderThickness="0" Background="GhostWhite" Margin="0,305,5,10" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" >
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+            <RichTextBox.Document>
+                <FlowDocument PageWidth="65535" />
+            </RichTextBox.Document>
+        </RichTextBox>
+        <ComboBox HorizontalAlignment="Left" Margin="10,284,0,0" x:Name="cmbArchivos" VerticalAlignment="Top" Width="528"/>
+        <Button Content="Ver" HorizontalAlignment="Left" Margin="543,284,0,0" x:Name="btnVer" VerticalAlignment="Top" Width="75" Click="btnVer_Click"/>
     </Grid>
 </UserControl>
