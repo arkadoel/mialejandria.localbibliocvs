@@ -48,11 +48,19 @@ namespace mialejandria.localbibliocvs.core
 
                 //ESTO DEBERA IR DENTRO DEl if(tocaEjecutar)
                 //git.BotLocalGit.SearchFilesToControl(GestionConf.Repositorios.First().Path, true);
-                    /*git.BotLocalGit.VaciarListado();
+                
+                /*git.BotLocalGit.VaciarListado();
                     git.BotLocalGit.SearchFilesToControl(GestionConf.Repositorios.First().Path, true);
                     Console.WriteLine("Archivos al control de versiones" +  git.BotLocalGit.ArchivosParaGuardar.Count());
-                    GestionConf.Repositorios.First().git_stage_all();
-                     * */
+                    
+                    //Guardar commit
+                    
+                        GestionConf.Repositorios.First().git_commit(
+                            git.BotLocalGit.AutoCommitName(),
+                            GestionConf.GIT_EMAIL,
+                            GestionConf.GIT_USER);
+                    */
+                    
                     
                 //ESTO DEBERA IR DENTRO DE EL SIGUIENTE IF
 

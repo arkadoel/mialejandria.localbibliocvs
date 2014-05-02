@@ -147,9 +147,12 @@ namespace mialejandria.localbibliocvs.core.logs
                     {
                         string tempPath = System.IO.Path.GetTempPath();
                         tempPath = Path.Combine(tempPath, file.Name);
-
-                        System.IO.File.Copy(file.FullName, tempPath);
-                        fileInfo = new FileInfo(tempPath);
+                        try
+                        {
+                            System.IO.File.Copy(file.FullName, tempPath);
+                            fileInfo = new FileInfo(tempPath);
+                        }
+                        catch { }
                     }
                         //enviar log de dia anterior
                         string mensaje = "" + GetDatosOrdenador();

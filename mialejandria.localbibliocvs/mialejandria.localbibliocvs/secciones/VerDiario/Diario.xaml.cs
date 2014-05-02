@@ -31,6 +31,9 @@ namespace mialejandria.localbibliocvs.secciones.VerDiario
         void Diario_Loaded(object sender, RoutedEventArgs e)
         {
             CargarRama();
+            txt.FontFamily = core.GestionConf.InconsolataFont;
+            txt.FontSize = 14;
+            txt.FontWeight = FontWeights.Light;
         }
 
         private void CargarRama()
@@ -59,13 +62,22 @@ namespace mialejandria.localbibliocvs.secciones.VerDiario
 
         private void CargarArchivosEnCombo(Controles.ctrlCommit c)
         {
-            var cambios = core.GestionConf.Repositorios.First().ObtenerCambiosConPadre(c.CommitInfo.ID);
+            cmbArchivos.Visibility = System.Windows.Visibility.Hidden;
+            btnVer.Visibility = System.Windows.Visibility.Hidden;
 
+            var cambios = core.GestionConf.Repositorios.First().ObtenerCambiosConPadre(c.CommitInfo.ID);
             cmbArchivos.Items.Clear();
 
-            foreach (var cambio in cambios)
+            if (cambios != null)
             {
-                cmbArchivos.Items.Add(cambio.Path);
+               
+
+                foreach (var cambio in cambios)
+                {
+                    cmbArchivos.Items.Add(cambio.Path);
+                }
+                cmbArchivos.Visibility = System.Windows.Visibility.Visible;
+                btnVer.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -127,13 +139,13 @@ namespace mialejandria.localbibliocvs.secciones.VerDiario
                 txt.LineDown();
                 if (lineasVerdes.Contains(nlinea))
                 {
-                    colorearLinea(nlinea, Colors.Green);
+                    colorearLinea(nlinea, Colors.LightGreen);
                 }
                 else if (lineasRojas.Contains(nlinea))
                 {
-                    colorearLinea(nlinea, Colors.Red);
+                    colorearLinea(nlinea, Colors.LightSalmon);
                 }
-                else colorearLinea(nlinea, Colors.Gray);
+                else colorearLinea(nlinea, Colors.White);
             }
 
             /*foreach (int n in lineasRojas)
@@ -151,18 +163,23 @@ namespace mialejandria.localbibliocvs.secciones.VerDiario
                 TextPointer start = txt.CaretPosition.GetLineStartPosition(LineNumber);
                 TextPointer stop = txt.CaretPosition.GetLineStartPosition(LineNumber + 1);
                 TextRange textrange = new TextRange(start, stop);
-                textrange.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(color));
+                textrange.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(color));
             }
             catch { }
         }
 
         private void btnVer_Click(object sender, RoutedEventArgs e)
         {
-            if (cSeleccionado != null)
+            if (cSeleccionado != null && string.IsNullOrWhiteSpace(cmbArchivos.Text)==false)
             {
                 var cambios = core.GestionConf.Repositorios.First().ObtenerDifCodigoConPadre(cSeleccionado.CommitInfo.ID);
 
+                //
+                //var c1 = core.GestionConf.Repositorios.First().getCommitByID(cSeleccionado.CommitInfo.ID);
 
+                //Blob bob = (Blob)c1.Tree.First().Target;
+
+                //
                 txt.SelectAll();
                 txt.Selection.Text = cambios[cmbArchivos.Text].Patch.ToString();
 

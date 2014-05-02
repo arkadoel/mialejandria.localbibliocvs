@@ -41,7 +41,7 @@ namespace mialejandria.localbibliocvs.core
         public static void CargarReposEnConfig()
         {
             List<git.Repositorio> lista = new List<git.Repositorio>();
-            XDocument doc = CargaXMLConfiguracion();
+            /*XDocument doc = CargaXMLConfiguracion();
             
             var repos = from u in doc.Elements("conf").Elements("Repos").Elements()
                         select u;
@@ -57,11 +57,13 @@ namespace mialejandria.localbibliocvs.core
                 }
             }
 
+             * 
+             * 
             GestionConf.Repositorios = lista;
             LiberarMemoria(doc);
+            */
             
-            
-            git.Repositorio repo = new git.Repositorio(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),true);
+            git.Repositorio repo = new git.Repositorio(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),true);
             lista.Add(repo);
             GestionConf.Repositorios = lista;
 

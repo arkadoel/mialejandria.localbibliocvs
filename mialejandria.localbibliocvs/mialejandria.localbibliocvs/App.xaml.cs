@@ -11,6 +11,7 @@ namespace mialejandria.localbibliocvs
 {
     /// <summary>
     /// Lógica de interacción para App.xaml
+	/// holas
     /// </summary>
     public partial class App : Application
     {
@@ -43,9 +44,10 @@ namespace mialejandria.localbibliocvs
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-
+            core.logs.Logs.initLog();
             //tareas iniciales
             core.GestionConf.CargarDatosConfiguracion();
+            core.GestionConf.CargarFuentes();
 
             //lanzar icono de la barra de tareas
             bandeja.IconoBandeja icono = new bandeja.IconoBandeja();

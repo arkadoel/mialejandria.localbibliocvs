@@ -15,6 +15,9 @@ namespace mialejandria.localbibliocvs.core.git
     {
         public static List<string> ArchivosParaGuardar { get; set; }
 
+        /// <summary>
+        /// Vacia el listado de archivos a controlar
+        /// </summary>
         public static void VaciarListado()
         {
             
@@ -46,10 +49,10 @@ namespace mialejandria.localbibliocvs.core.git
                         //string temppath = Path.Combine(dirDestino, file.Name);
                         //file.CopyTo(temppath, true);
 
-                        //if (git.Repositorio.extensionesPermitidas(file.Extension, null))
+                        if (git.Repositorio.extensionesPermitidas(file.Extension, null))
                         {
                             ArchivosParaGuardar.Add(file.FullName);
-                            
+                            MeterEnIndice(file.FullName);
                         }
 
                     }
@@ -78,5 +81,27 @@ namespace mialejandria.localbibliocvs.core.git
             }
         }
 
+        public static void MeterEnIndice(string path)
+        {
+            try
+            {
+                core.GestionConf.Repositorios.First().git_trackFile(path);
+                
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Genera un nombre automatico para un commit
+        /// </summary>
+        /// <returns></returns>
+        public static string AutoCommitName()
+        {
+            string n = "Fecha: ";
+            n += DateTime.Today.ToShortDateString();
+            n += " " + DateTime.Now.ToLongTimeString();
+
+            return n;
+        }
     }
 }

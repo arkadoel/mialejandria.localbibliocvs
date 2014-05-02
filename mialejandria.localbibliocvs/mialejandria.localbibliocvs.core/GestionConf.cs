@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml;
 
@@ -16,6 +17,9 @@ namespace mialejandria.localbibliocvs.core
         public static string GIT_USER { get; set; }
         public static string GIT_EMAIL { get; set; }
 
+        //fuentes
+        public static FontFamily InconsolataFont { get; set; }
+
         /// <summary>
         /// carga los datos iniciales de la aplicaicon
         /// </summary>
@@ -24,6 +28,7 @@ namespace mialejandria.localbibliocvs.core
             core.GestionarXML.CargarReposEnConfig();
             core.GestionarXML.CargarTareasEnConfig();
             core.GestionarXML.CargarUsuarioGit();
+            
         }
 
         /// <summary>
@@ -34,6 +39,13 @@ namespace mialejandria.localbibliocvs.core
         {
             _win.Top = System.Windows.SystemParameters.WorkArea.Height - _win.Height;
             _win.Left = System.Windows.SystemParameters.WorkArea.Width - _win.Width;
+        }
+
+        public static void CargarFuentes()
+        {
+            List<FontFamily> fuentes = Fonts.GetFontFamilies("file:///"+ System.IO.Directory.GetCurrentDirectory() +"/Fuentes/").ToList();
+            InconsolataFont = fuentes.First();
+
         }
 
         public static void DoEvents(Dispatcher dis)

@@ -83,7 +83,7 @@ namespace mialejandria.localbibliocvs.core.git
             Tree t1 = Repo.Lookup<Commit>(cPadre).Tree;
             Tree t2 = Repo.Lookup<Commit>(cHijo).Tree;
 
-            var changes = Repo.Diff.Compare<TreeChanges>(t1, t2);
+            var changes = Repo.Diff.Compare<TreeChanges>(t1, t2);           
             
             return changes;
         }
@@ -122,7 +122,8 @@ namespace mialejandria.localbibliocvs.core.git
                 
 
                 List<string> extensiones = new List<string>(){
-                    ".cs",".java", ".c", ".h", ".xml"
+                    ".cs",".java",".csproj",".htm",".html", 
+                    ".c", ".h", ".xml",".sln", ".suo",".config", ".xaml"
                 };
 
                 if (extra != null)
@@ -157,6 +158,13 @@ namespace mialejandria.localbibliocvs.core.git
             return Repo.Lookup<Commit>(id);
         }
 
+        public Blob getBlobByID(string id)
+        {
+            Commit c = getCommitByID(id);
+
+            return null;
+        }
+
         /// <summary>
         /// Obtiene los cambios entre un commit hijo y un commit padre 
         /// solo pasando el commit actual
@@ -170,7 +178,10 @@ namespace mialejandria.localbibliocvs.core.git
 
             if (chijo != null)
             {
-                cpadre = chijo.Parents.First();
+                if (chijo.Parents.Count() > 0)
+                {
+                    cpadre = chijo.Parents.First();
+                }
             }
 
             if (cpadre != null)
@@ -233,14 +244,34 @@ namespace mialejandria.localbibliocvs.core.git
                 {
                     Repo = new Repository(Path);
                     StatusOptions op = new StatusOptions();
+                   
 
                     return Repo.Index.RetrieveStatus();
                 }
                 else return null;
             }
-            catch {
+            catch(Exception ex) {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Permite saber si existen cambios a guardar
+        /// </summary>
+        /// <returns></returns>
+        public bool HayCambiosQueGuardar()
+        {
+            bool hay = false;
+
+            RepositoryStatus status = getStatus();
+
+            if (status.Modified.Count() > 0 || status.Staged.Count() > 0
+                || status.Added.Count() > 0 || status.Removed.Count() > 0)
+            {
+                hay = true;
+            }
+
+            return hay;
         }
 
         /// <summary>
@@ -304,45 +335,46 @@ namespace mialejandria.localbibliocvs.core.git
             //repo.Index.Remove(estado.FilePath,false); 
             Commit newC = null;
             RepositoryStatus status = getStatus();
-            ExplicitPathsOptions explicitOptions = new ExplicitPathsOptions();
-            
 
-            if (status.Modified.Count() > 0)
+            if (status != null)
             {
-                foreach (var archivo in status.Modified)
+                ExplicitPathsOptions explicitOptions = new ExplicitPathsOptions();
+
+
+                if (status.Modified.Count() > 0)
                 {
-                    if (extensionesPermitidas(archivo.FilePath, null))
+                    foreach (var archivo in status.Modified)
                     {
-                        Repo.Index.Stage(archivo.FilePath);
+                        if (extensionesPermitidas(archivo.FilePath, null))
+                        {
+                            Repo.Index.Stage(archivo.FilePath);
+                        }
                     }
                 }
-            }
 
-            if (status.Modified.Count() > 0 || status.Staged.Count() > 0 ||
-                status.Removed.Count() > 0 || status.Added.Count() > 0 || status.Missing.Count() > 0)
+            }
+            CommitOptions options = new CommitOptions();
+
+            Signature signature = new Signature(name, email, DateTimeOffset.Now);
+            try
             {
-                CommitOptions options = new CommitOptions();
 
-                Signature signature = new Signature(name, email, DateTimeOffset.Now);
-                try
-                {
-                    
-                    options.AmendPreviousCommit = false;
+                options.AmendPreviousCommit = false;
 
-                    newC = Repo.Commit(message,signature,signature, options);
-                   
-                    // /*Deprecated*/ newC = Repo.Commit(message, signature, signature, false);
-                    // newC.Parents
-                }
-                catch (Exception ex)
-                {
-                    options.AmendPreviousCommit = true;
-                    newC = Repo.Commit(message, signature, signature, options);
-                    //newC = Repo.Commit(message, signature, signature, true);
-                }
+                newC = Repo.Commit(message, signature, signature, options);
+
+                // /*Deprecated*/ newC = Repo.Commit(message, signature, signature, false);
+                // newC.Parents
             }
-
+            catch (Exception ex)
+            {
+                options.AmendPreviousCommit = true;
+                newC = Repo.Commit(message, signature, signature, options);
+                //newC = Repo.Commit(message, signature, signature, true);
+            }
         }
+    
+        
         
         /// <summary>
         /// Meter en el indice un archivo
@@ -352,9 +384,37 @@ namespace mialejandria.localbibliocvs.core.git
         {
             try
             {
+                try
+                {
+                    ExplicitPathsOptions op = new ExplicitPathsOptions();
+                    
+                    FileStatus sta = Repo.Index.RetrieveStatus(filePath);
+                    if (sta == FileStatus.Nonexistent)
+                    {
+                        Repo.Index.Unstage(filePath);
+                    }
+                    core.logs.Logs.WriteText("Control Git", "estado: " + sta.ToString() + " archivo: " + filePath);
+                }
+                catch(Exception ex)
+                {
+                    core.logs.Logs.WriteError("Error track file", ex);
+                }
+
                 Repo.Index.Stage(filePath);
             }
-            catch { }
+            catch (Exception ex){
+                var l = filePath;
+            }
+        }
+
+        public void git_ForceStage(string filePath)
+        {
+            FileStatus sta = Repo.Index.RetrieveStatus(filePath);
+            if (sta == FileStatus.Modified)
+            {
+                Repo.Index.Stage(filePath);
+            }
+            
         }
 
         public Branch getRama(string name)
@@ -372,11 +432,22 @@ namespace mialejandria.localbibliocvs.core.git
             return rama;
         }
 
+        /// <summary>
+        /// Lista TODOS los commits de una determinada rama
+        /// </summary>
+        /// <param name="branchName"></param>
+        /// <returns></returns>
         public List<CommitShortInfo> listarCommitsRama(string branchName)
         {
             return listarCommitsRama(branchName, -1);
         }
 
+        /// <summary>
+        /// Lista un determinado numero de commits de una rama
+        /// </summary>
+        /// <param name="branchName"></param>
+        /// <param name="TOP"></param>
+        /// <returns></returns>
         public List<CommitShortInfo> listarCommitsRama(string branchName, int TOP)
         {
             List<CommitShortInfo> lista = new List<CommitShortInfo>();
