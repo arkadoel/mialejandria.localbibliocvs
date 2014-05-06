@@ -26,7 +26,7 @@ namespace mialejandria.localbibliocvs.core
         public static void CargarDatosConfiguracion()
         {
             core.GestionarXML.CargarReposEnConfig();
-            core.GestionarXML.CargarTareasEnConfig();
+            core.GestionarXML.CargarTareasRelojEnConfig();
             core.GestionarXML.CargarUsuarioGit();
             
         }

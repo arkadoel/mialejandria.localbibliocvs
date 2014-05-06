@@ -16,7 +16,7 @@ namespace mialejandria.localbibliocvs.core
         public static void ejecutarReloj()
         {
             int pasadas = PASADAS;
-            GestionarXML.CargarTareasEnConfig();
+            GestionarXML.CargarTareasRelojEnConfig();
             Console.Title = "Consola de depuracion";
             Console.WriteLine("Iniciado reloj, un punto por cada tick de reloj: ");
 
@@ -136,7 +136,7 @@ namespace mialejandria.localbibliocvs.core
                 if (pasadas >= PASADAS)
                 {
                     pasadas = 0;
-                    GestionarXML.CargarTareasEnConfig();
+                    GestionarXML.CargarTareasRelojEnConfig();
                 }
                 else pasadas++;
 

@@ -82,7 +82,7 @@ namespace mialejandria.localbibliocvs.core
         /// <summary>
         /// Carga la lista de tareas a ejecutar por el reloj en gestionConf.Tareas
         /// </summary>
-        public static void CargarTareasEnConfig()
+        public static void CargarTareasRelojEnConfig()
         {
             XDocument doc = CargaXMLConfiguracion();
             List<TareaReloj> lista = new List<TareaReloj>();
