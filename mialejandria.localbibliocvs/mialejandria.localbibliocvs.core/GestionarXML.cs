@@ -154,5 +154,35 @@ namespace mialejandria.localbibliocvs.core
             }
 
         }
+
+
+
+
+
+        public static void CargarTareasUsuario()
+        {
+            XDocument doc = CargaXMLConfiguracion();
+            List<TareaProgramador> lista = new List<TareaProgramador>();
+            var tars = from u in doc.Elements("conf").Elements("TareasUsuario").Elements()
+                       select u;
+
+            if (tars != null)
+            {
+                TareaProgramador t = null;
+                foreach (var elemento in tars)
+                {
+                    t = new TareaProgramador();
+                    t.Estado = elemento.Attribute("Estado").Value.ToString();
+                    t.Titulo = elemento.Attribute("Titulo").Value.ToString();
+                    t.Descripcion = elemento.Attribute("Descripcion").Value.ToString();
+                    t.Asignada = core.GestionConf.GIT_USER;
+
+                    lista.Add(t);
+                }
+            }
+
+            GestionConf.TareasUsuario = lista;
+            LiberarMemoria(doc);
+        }
     }
 }

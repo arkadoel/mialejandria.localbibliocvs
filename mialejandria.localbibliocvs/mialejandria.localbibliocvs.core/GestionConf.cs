@@ -13,6 +13,7 @@ namespace mialejandria.localbibliocvs.core
     public class GestionConf
     {
         public static List<TareaReloj> Tareas { get; set; }
+        public static List<TareaProgramador> TareasUsuario { get; set; }
         public static List<git.Repositorio> Repositorios { get; set; }
         public static string GIT_USER { get; set; }
         public static string GIT_EMAIL { get; set; }
